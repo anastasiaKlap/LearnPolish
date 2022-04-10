@@ -1,0 +1,77 @@
+﻿@model LearnPolish.Models.Question
+@{
+    ViewBag.Title = @ViewBag.score;
+}
+<br>
+
+<h1></h1>
+ 
+<div>
+    @using (Html.BeginForm("FindNextQuestion", "ShowQuestion", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.ValidationMessageFor(m => m.SelectedValue, "", new { @class = "text-danger" })
+            <h4>Пытане @Session["questionN"] з @Session["AllAns"] </h4>
+            <hr />
+            <dl class="dl-horizontal">
+
+
+                <dd>
+                    @Html.DisplayFor(model => model.QuestionTitle)
+                </dd>
+
+                <dt>
+                    @Html.RadioButtonFor(model => model.SelectedValue, "1")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ans1)
+                </dd>
+
+                <dt>
+                    @Html.RadioButtonFor(model => model.SelectedValue, "2")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ans2)
+                </dd>
+
+                <dt>
+                    @Html.RadioButtonFor(model => model.SelectedValue, "3")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ans3)
+                </dd>
+
+                <dt>
+                    @Html.RadioButtonFor(model => model.SelectedValue, "4")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ans4)
+                </dd>
+
+                @Html.HiddenFor(m => m.Ans1)
+                @Html.HiddenFor(m => m.Ans2)
+                @Html.HiddenFor(m => m.Ans3)
+                @Html.HiddenFor(m => m.Ans4)
+                @Html.HiddenFor(m => m.ID)
+                @Html.HiddenFor(m => m.QuestionTitle)
+                @Html.HiddenFor(m => m.ExamID)
+                @Html.HiddenFor(m => m.CorrectAns)
+
+
+            </dl>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Далей" class="btn btn-success" />
+            </div>
+        </div>
+
+
+    }
+</div>

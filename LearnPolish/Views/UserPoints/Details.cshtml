@@ -1,0 +1,58 @@
+﻿@model LearnPolish.Models.UserPoints
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserPoints</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lesson.LessonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lesson.LessonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profile.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profile.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForLetters)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForLetters)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForListen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForListen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForSee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForSee)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

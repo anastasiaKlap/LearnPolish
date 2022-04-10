@@ -1,0 +1,47 @@
+﻿@using LearnPolish.Models
+@model LearnPolish.Models.Image
+
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("NextCard", "ShowCard", FormMethod.Post))
+{
+    <div>
+        <h4> </h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+
+            <dt>
+
+                @ViewBag.ID
+                @Html.HiddenFor(a => a.ID)
+            </dt>
+            <dd>
+                <img src="~/Images/@Model.Card" alt="" height="300px" width="300px">
+            </dd>
+            @foreach (var item in Model.Translations)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.Word)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.TranslationToPolish)
+                </div>
+                @Html.HiddenFor(modelItem => item.Word)
+                @Html.HiddenFor(modelItem => item.TranslationToPolish)
+            }
+
+            @Html.HiddenFor(m => m.Card)
+            @Html.HiddenFor(m => m.ID)
+
+
+        </dl>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="NEXT" class="btn btn-danger" />
+        </div>
+    </div>
+
+
+}

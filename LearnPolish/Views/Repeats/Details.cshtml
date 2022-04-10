@@ -1,0 +1,42 @@
+﻿@model LearnPolish.Models.Repeat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Repeat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Image.Card)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image.Card)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profile.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profile.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToRepeat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToRepeat)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

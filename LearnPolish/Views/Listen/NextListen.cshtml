@@ -1,0 +1,68 @@
+﻿@model LearnPolish.Models.Image
+@{
+    ViewBag.Title = "";
+}
+<br>
+
+<h1></h1>
+
+<div>
+    @using (Html.BeginForm("FindNextListen", "Listen", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+    <div>
+
+        <h4>Слова @Session["questionN"] з @Session["AllAns"] </h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <h5>Паслухай i напiшы, што пачуеш</h5>
+            <dt>
+
+                @ViewBag.ID
+                @Html.HiddenFor(image => image.ID)
+            </dt>
+            @foreach (var item in Model.Translations)
+            {
+                <div>
+                    @Html.HiddenFor(modelItem => item.TranslationToPolish)
+                </div>
+
+                <button id="listen" class="btn btn-primary" title="Слухаць">Слухаць </button>
+                <br />
+                <input name="WordListen" id="WordListen" value=""></input>
+
+            }
+
+            @Html.HiddenFor(m => m.Card)
+            @Html.HiddenFor(m => m.ID)
+
+
+        </dl>
+
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Далей" class="btn btn-success" />
+            </div>
+        </div>
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script> 
+
+            $('#listen').click(function (e) {
+                e.preventDefault();
+                var synth = window.speechSynthesis,
+                message = new SpeechSynthesisUtterance();
+                message.lang = 'pl-PL'; 
+                message.text = $("#item_TranslationToPolish").val(); ;
+                synth.speak(message);
+                
+                
+
+        }); 
+
+        </script>
+    }
+</div>

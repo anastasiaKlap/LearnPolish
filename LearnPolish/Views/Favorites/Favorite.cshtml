@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LearnPolish.Models.Favorite>
+
+@{
+    ViewBag.Title = "Favorite";
+}
+
+<h2>Улюбленныя</h2>
+
+<div class="row" mt-5 md-2>
+    @if (@Session["isEmpty"].ToString() == "0")
+    {
+    <p>Пакуль у цябе няма ўлюбленных слоў</p>
+        }
+            else { 
+    foreach (var item in Model)
+    {  
+<div class="col-lg-4">
+    <img src="~/Images/@item.Image.Card" alt="" height="100px" width="100px">
+    @foreach (var t in item.Image.Translations)
+    {
+        <p>
+            @t.Word
+        </p>
+        <p>
+            @t.TranslationToPolish
+        </p>
+
+    }
+
+    <div>
+        @Html.ActionLink(" ", "DeleteFavorite", "Lessons", new { id = item.ID, ImageId = item.ID }, new { @class = "glyphicon glyphicon-heart", @style = "color:red", @title = "Разкахаць" })
+    </div>
+     
+
+</div>
+        }
+    }
+
+</div>

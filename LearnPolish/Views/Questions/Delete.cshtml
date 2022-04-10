@@ -1,0 +1,81 @@
+﻿@model LearnPolish.Models.Question
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Выдаліць</h2>
+
+ 
+<div>
+    <h4>Пытанне</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Exam.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Exam.ExamTitle)
+        </dd> 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ans1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ans1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ans2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ans2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ans3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ans3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ans4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ans4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorrectAns)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorrectAns)
+        </dd>
+         
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Выдаліць" class="btn btn-default" /> |
+    @Html.ActionLink("Да лiсты", "Index", new { area = "" }, new { @class = "btn btn-outline-dark" }))
+</div>
+    }
+</div>

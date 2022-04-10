@@ -1,0 +1,60 @@
+﻿@model LearnPolish.Models.Image
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Падрабязнасці</h2>
+
+<div>
+    <h4>Фота</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Назва
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lesson.LessonName)
+        </dd>
+
+        <img src="~/Images/@Model.Card" alt="" height="300px">
+        <div>
+            @foreach (var item in Model.Translations)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.Word)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.TranslationToPolish)
+                </div> 
+
+
+                <div>
+                    @Html.ActionLink("Рэдагаваць", "Edit", "Translations", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Выдаліць", "Delete", "Translations", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                </div> 
+
+                <br />
+            }
+            <hr />
+        </div>
+        <div>
+            @using (Html.BeginForm("Create", "Translations"))
+            {
+
+
+                @Html.Hidden("ImageID", Model.ID);
+
+
+            }
+            @Html.ActionLink("Дадаць назву", "Create", "Translations", new { area = "", idL = Model.LessonID}, new { @class = "btn btn-success btn-sm" })
+
+        </div>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Рэдагаваць", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Да лiсты", "Index", new { area = "" }, new { @class = "btn btn-outline-dark" })
+</p>

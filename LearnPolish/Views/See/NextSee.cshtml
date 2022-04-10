@@ -1,0 +1,49 @@
+﻿@model LearnPolish.Models.Image
+@{
+    ViewBag.Title = "NextSee";
+}
+ 
+
+<h1></h1>
+
+<div>
+    @using (Html.BeginForm("FindNextSee", "See", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+    <div>
+
+        <h4>Слова @Session["questionN"] з @Session["AllAns"] </h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <h5>Напiшы, што бачыш на фота </h5>
+            <dt>
+
+                @ViewBag.ID
+                @Html.HiddenFor(image => image.ID)
+            </dt>
+            @foreach (var item in Model.Translations)
+            {
+                <div>
+                    <img src="~/Images/@Model.Card" alt="" height="300px" >
+                </div>
+
+                <input name="WordSee" id="WordSee" value=""></input>
+
+            }
+
+            @Html.HiddenFor(m => m.Card)
+            @Html.HiddenFor(m => m.ID)
+
+
+        </dl>
+
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Далей" class="btn btn-success" />
+            </div>
+        </div>
+         
+    }
+</div>

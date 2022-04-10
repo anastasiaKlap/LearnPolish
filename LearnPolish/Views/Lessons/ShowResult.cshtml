@@ -1,0 +1,17 @@
+﻿@model LearnPolish.Models.Lesson
+@{
+    ViewBag.Title = "ShowResult";
+}
+
+<h2>Балы</h2>
+
+<div>
+
+    <h2>  <label>Балы : @Session["correctAns"] / @Session["AllAns"]</label></h2>
+
+    <p>Можашь перайсці і забачыць, ці маешь штосьці да паўтарення альбо перайсці да заняткаў</p>
+
+    @Html.ActionLink("Паутарыць", "Index", "Repeats", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Да заняткаў", "LessonsForYou", "Lessons", new { @class = "btn btn-success" })
+
+</div> 

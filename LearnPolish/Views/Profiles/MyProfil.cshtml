@@ -1,0 +1,234 @@
+﻿@model IEnumerable<LearnPolish.Models.Module>
+
+@{
+    ViewBag.Title = "MyProfil";
+}
+<div>
+    <h2>Профіль</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Лагiн
+        </dt>
+
+        <dd>
+            @User.Identity.Name
+        </dd>
+        <dt>
+            Узровень
+        </dt>
+        <dd>
+            @Session["level"]
+        </dd>
+    </dl>
+    <div class="row mt-5 md-2">
+        @foreach (var item in Model)
+        {
+            if (@Session["glyphicon"] == null)
+            {
+                { Session["glyphicon"] = 1; }
+            }
+            else
+            {
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            }
+            if (item.ModulLevel != @Session["level"].ToString())
+            {
+
+                <button class="btn btn-primary" style="border-radius: 14px" href="#" role="button">@item.ModulLevel</button>
+            }
+            else
+            {
+                <button class="btn btn-success" style="border-radius: 14px"  href="#" role="button">@item.ModulLevel</button>
+            }
+        }
+    </div>
+    <div>
+        <h3>Твае балы</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Назва занятка
+                </th>
+                <th>
+                    За літары
+                </th>
+                <th>
+                    За слуханне
+                </th>
+                <th>
+                    За абразак
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                foreach (var less in item.Lessons)
+                {
+
+                    foreach (var userP in less.UserPoints.Where(u => u.ProfileID == Convert.ToInt32(Session["user"])))
+                    {
+                        if (userP.ForLetters == less.Images.Count() && userP.ForListen == less.Images.Count() && userP.ForSee == less.Images.Count())
+                        {
+                            <tr title="Усе балы на максе">
+                                <td  style="background-color: gold " >
+                                    @Html.DisplayFor(modelItem => userP.Lesson.LessonName)
+                                </td>
+                                <td style="background-color: gold " >
+                                    @Html.DisplayFor(modelItem => userP.ForLetters) / @less.Images.Count()
+                                </td>
+                                <td style="background-color: gold " >
+                                    @Html.DisplayFor(modelItem => userP.ForListen) / @less.Images.Count()
+                                </td>
+                                <td style="background-color: gold " >
+                                    @Html.DisplayFor(modelItem => userP.ForSee) / @less.Images.Count()
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Да вурока", "Game", "Lessons", new { id = userP.Lesson.ID }, new { @class = "btn btn-success btn-sm" })
+                                </td>
+
+                            </tr>
+                        } 
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => userP.Lesson.LessonName)
+                                </td>
+                                @if (userP.ForLetters == 0)
+                                {
+                                    <td class="danger">
+                                        @Html.DisplayFor(modelItem => userP.ForLetters)  / @less.Images.Count()
+                                    </td>
+                                }
+                                else if (userP.ForLetters == less.Images.Count())
+                                {
+                                    <td class="success">
+                                        @Html.DisplayFor(modelItem => userP.ForLetters)  / @less.Images.Count()
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => userP.ForLetters)  / @less.Images.Count()
+                                    </td>
+                                }
+                                @if (userP.ForListen == 0)
+                                {
+                                    <td class="danger">
+                                        @Html.DisplayFor(modelItem => userP.ForListen)  / @less.Images.Count()
+                                    </td>
+                                }
+                                else if (userP.ForListen == less.Images.Count())
+                                {
+                                    <td class="success">
+                                        @Html.DisplayFor(modelItem => userP.ForListen)  / @less.Images.Count()
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => userP.ForListen)  / @less.Images.Count()
+                                    </td>
+                                }
+                                @if (userP.ForSee == 0)
+                                {
+                                    <td class="danger">
+                                        @Html.DisplayFor(modelItem => userP.ForSee)  / @less.Images.Count()
+                                    </td>
+                                }
+                                else if (userP.ForSee == less.Images.Count())
+                                {
+                                    <td class="success">
+                                        @Html.DisplayFor(modelItem => userP.ForSee)  / @less.Images.Count()
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => userP.ForSee)  / @less.Images.Count()
+                                    </td>
+                                }
+                                <td>
+                                    @Html.ActionLink("Да вурока", "Game", "Lessons", new { id = userP.Lesson.ID }, new { @class = "btn btn-success btn-sm" })
+                                </td>
+
+                            </tr>
+                                            }
+                    }
+                }
+            }
+
+            <tr class="info" title="Агульна інфармацыя пра балы">
+                <td>
+                    Сума ўсех тваіх балаў
+                </td>
+                <td>
+                    @Session["SumForLetter"] / @Session["allPoint"]
+                </td>
+                <td>
+                    @Session["SumForListen"]  / @Session["allPoint"]
+                </td>
+                <td>
+                    @Session["SumForSee"] / @Session["allPoint"]
+                </td>
+            </tr>
+            <tr class="info" title="Агульна інфармацыя пра балы">
+                <td>
+                    Да наступнага ўзроўня (75%)
+                </td>
+                @if (Convert.ToInt32(Session["howMachForLetter"]) <= 0)
+                {
+                    <td>
+                        0
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Session["howMachForLetter"]
+                    </td>
+                } 
+                @if (Convert.ToInt32(Session["howMachForListen"]) <= 0)
+                {
+                    <td>
+                        0
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Session["howMachForListen"]
+                    </td>
+                } 
+                @if (Convert.ToInt32(Session["howMachForSee"]) <= 0)
+                {
+                    <td>
+                        0
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Session["howMachForSee"]
+                    </td>
+                } 
+
+            </tr>
+        </table>
+
+    </div>
+</div>
+ 
+<hr />
+<div>
+@if (Session["nextLevel"] != null)
+{
+    <p>@Html.ActionLink("Новы пазем", "NewLevel", "Lessons", null, new { @class = "btn btn-success btn-sm" })</p> }
+else
+{
+    <p>Каб перайсці на новы ўзровень, ты павінен сумарна зарабіць 75% балаў з кожнай з гер</p>
+    <p>@Html.ActionLink("Новы пазем", "NewLevel", "Lessons", null, new { @class = "btn btn-success btn-sm, disabled" })</p>
+}
+</div>

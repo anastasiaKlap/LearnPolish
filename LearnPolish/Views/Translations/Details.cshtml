@@ -1,0 +1,50 @@
+﻿@model LearnPolish.Models.Translation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Падрабязнасці</h2>
+
+<div>
+    <h4>Тлумачэнне</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Image.Card)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image.Card)
+        </dd> 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Word)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Word)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TranslationToPolish)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TranslationToPolish)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SwitchedСharacter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SwitchedСharacter)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Рэдагаваць", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Да лiсты", "Index", new { area = "" }, new { @class = "btn btn-outline-dark" })
+</p>

@@ -1,0 +1,125 @@
+﻿@model LearnPolish.Models.Image
+@{
+    ViewBag.Title = @ViewBag.score;
+}
+<br>
+
+<h1></h1>
+
+<div>
+    <div>
+
+        <h4>Слова @Session["questionN"] з @Session["AllAns"] </h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <h5>З лiтар трэба скласцi тое, што паказана на фота</h5>
+            <dt>
+            </dt>
+            <dd>
+                <img src="~/Images/@Model.Card" alt="" height="300px">
+            </dd>
+            @foreach (var item in Model.Translations)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.Word)
+                </div>
+                <div id="switched">
+                    @Html.HiddenFor(modelItem => item.SwitchedСharacter)
+                </div>
+                <div id="btn">
+
+                </div>
+                <br />
+                <div class="table-block">
+                    <input type="text" id="WordFromLetters" name="WordFromLetters" disabled></input>
+                    <button id="del" class="btn btn-danger" title="Выдаліць апошнюю літару">x</button>
+                    <button id="res" class="btn btn-warning" title="Выдаліць усе">Выдаліць усе</button>
+                </div>
+
+                @Html.HiddenFor(modelItem => item.Word)
+
+            }
+
+        </dl>
+
+    </div>
+    @using (Html.BeginForm("FindeNextWordLetters", "WordLetters", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @ViewBag.ID
+        @Html.HiddenFor(a => a.ID)
+        foreach (var item in Model.Translations)
+        {
+            @Html.HiddenFor(modelItem => item.SwitchedСharacter)
+            <input type="hidden" name = "Word" id="Word" value=""></input>
+            @Html.HiddenFor(modelItem => item.Word)
+
+        }
+        @Html.HiddenFor(m => m.Card)
+        @Html.HiddenFor(m => m.ID)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Далей" class="btn btn-success" />
+        </div>
+    </div>
+
+
+}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+        let word = document.getElementById("item_Switched_haracter").value; 
+        let sw = String(word);
+        const chars = sw.split("");
+        let myelement = document.getElementById("btn");
+
+        for (var i = 0; i < chars.length; i++) {
+            var btn = document.createElement("button");
+            btn.setAttribute("id", "btnid" + i);
+            btn.setAttribute("class", "letters");
+            btn.setAttribute("value", chars[i]);
+            btn.style.backgroundColor = "#3333cc";
+            btn.style.border = "#3333cc";
+            btn.style.color = "white";
+            btn.style.borderRadius = "8px";
+            var t = document.createTextNode(chars[i]);
+            btn.appendChild(t);
+            myelement.appendChild(btn);
+
+        }
+         
+        $('button.letters').click(function (e) {
+            e.preventDefault();
+            let txt = ($(this).val());
+            $(this).hide();
+            let values = $("#WordFromLetters").val();
+            $("#WordFromLetters").val(values+txt);
+            let element = document.getElementById("Word");
+            element.value = document.getElementById("WordFromLetters").value; 
+
+
+        });
+
+        $('#del').click(function (e) {
+                e.preventDefault();
+            let txt = $('#WordFromLetters').val();
+            let elem = $(this).find('button'); 
+            var lastChar = txt.substr(txt.length - 1); 
+            $('button.letters').filter(function () { return this.value == lastChar }).show();
+            var shortenedString = txt.substr(0, (txt.length - 1));
+            $('#WordFromLetters').val(shortenedString);
+            let element = document.getElementById("Word");
+            element.value = document.getElementById("WordFromLetters").value;
+
+        }); 
+
+        $('#res').click(function (e) {
+            e.preventDefault();
+            let txt = $('#WordFromLetters').val();
+            $("#WordFromLetters").val("");
+            $('button.letters').show();
+
+        });
+
+    </script>
+
+</div>

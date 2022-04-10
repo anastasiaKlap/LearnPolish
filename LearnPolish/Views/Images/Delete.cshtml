@@ -1,0 +1,39 @@
+﻿@model LearnPolish.Models.Image
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Выдаліць</h2>
+ 
+<div>
+    <h4>Фота</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lesson.LessonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lesson.LessonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Card)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Card)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Выдаліць" class="btn btn-default" /> |
+    @Html.ActionLink("Да лiсты", "Index", new { area = "" }, new { @class = "btn btn-outline-dark" }))
+</div>
+    }
+</div>

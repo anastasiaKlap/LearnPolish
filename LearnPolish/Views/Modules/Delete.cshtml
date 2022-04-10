@@ -1,0 +1,31 @@
+﻿@model LearnPolish.Models.Module
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Выдаліць</h2>
+ 
+<div>
+    <h4>Пазем</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ModulLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModulLevel)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Выдаліць" class="btn btn-default" /> |
+    @Html.ActionLink("Да лiсты", "Index", new { area = "" }, new { @class = "btn btn-outline-dark" })
+</div>
+    }
+</div>

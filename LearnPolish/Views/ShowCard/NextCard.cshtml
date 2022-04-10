@@ -1,0 +1,56 @@
+﻿@model LearnPolish.Models.Image
+@{
+    ViewBag.Title = "ob";
+}
+<br>
+
+<h1></h1>
+
+<div>
+    <div>
+
+        <h4>Слова @Session["questionN"] з @Session["AllAns"] </h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+
+            </dt>
+            <dd>
+                <img src="~/Images/@Model.Card" alt="" height="300px" >
+            </dd>
+            @foreach (var item in Model.Translations)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.Word)
+                </div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.TranslationToPolish)
+                </div>
+                <div>
+                    @Html.HiddenFor(modelItem => item.TranslationToPolish)
+                </div>
+                <button id="listen" class="btn btn-primary">Слухаць </button>
+            }
+
+        </dl>
+        @Html.ActionLink("Далей", "FindeNextCard", "ShowCard", new { id = Model.ID, IdL = Model.LessonID }, new { @class = "btn btn-success" })
+
+
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+
+
+        $('#listen').click(function (e) {
+                e.preventDefault();
+                var synth = window.speechSynthesis,
+                message = new SpeechSynthesisUtterance();
+                message.lang = 'pl-PL';
+                message.text = $("#item_TranslationToPolish").val();
+                synth.speak(message);
+
+        });
+
+    </script> 
+    </div>

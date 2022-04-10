@@ -1,0 +1,53 @@
+﻿@model IEnumerable<LearnPolish.Models.Module>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Пазем</h2>
+
+<p>
+    @Html.ActionLink("Стварыць", "Create", new { area = "" }, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Пазем
+        </th>
+        <th>
+            Усе заняткі
+        </th>
+        <th>
+            Усе словы
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        { Session["allWordsForEachLesson"] = 0; }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModulLevel)
+            </td>
+            <td>
+                @item.Lessons.Count()
+            </td>
+            @foreach (var lesson in item.Lessons)
+            {
+
+                { Session["allWordsForEachLesson"] = Convert.ToInt32(Session["allWordsForEachLesson"]) + lesson.Images.Count(); }
+
+            }
+            <td>
+                @Session["allWordsForEachLesson"]
+            </td>
+            <td>
+                @Html.ActionLink("Рэдагаваць", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Выдаліць", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Падрабязнасці", "Details", new { id = item.ID }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+    }
+
+</table>

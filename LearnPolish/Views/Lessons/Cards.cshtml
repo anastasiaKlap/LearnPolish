@@ -1,0 +1,36 @@
+﻿@model LearnPolish.Models.Lesson
+@{
+    ViewBag.Title = "Cards";
+}
+<div>
+<h2>@Html.DisplayFor(model => model.LessonName)</h2>
+ </div> 
+<div class="row" mt-5 md-2>
+    @foreach (var item in Model.Images)
+    {
+    <div class="col-lg-4">
+        <img src="~/Images/@item.Card" alt="" height="100px" width="100px">
+
+        @foreach (var translate in item.Translations)
+        {
+            <p>@translate.Word</p>
+            <p>@translate.TranslationToPolish</p>
+        }
+
+        @foreach (var fav in item.Favorites)
+        {
+            <div>
+                @Html.ActionLink(" ", "Favorite", new { id = item.ID }, new { @class = "glyphicon glyphicon-heart", @style = "color:red", @title = "Пакахана" })
+            </div>
+        }
+        @if(item.Favorites.Count() == 0) { 
+
+            <div>
+                @Html.ActionLink(" ", "Favorite", new { id = item.ID }, new { @class = "glyphicon glyphicon-heart-empty", @style = "color:red", @title = "Пакахаць" })
+            </div>
+        }
+    </div>
+    }
+
+</div> 
+<br />

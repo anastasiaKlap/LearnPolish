@@ -1,0 +1,84 @@
+﻿@model LearnPolish.Models.Lesson
+
+@{
+    ViewBag.Title = "Game";
+}
+
+
+<h2>
+    @Html.DisplayFor(model => model.LessonName)
+</h2>
+@using (Html.BeginForm("Index", "ShowCard", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <h5>Забач усе словы i спрубуй iх запамятаць</h5>
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.ID)
+    <dl class="dl-horizontal">
+    </dl>
+    <div class="form-group"> 
+            <input type="submit" value="Забачыць усе" class="btn btn-success" />
+         
+    </div>
+</div>
+}
+@using (Html.BeginForm("Index", "WordLetters", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <h5>З лiтар трэба скласцi тое, што паказана на фота</h5>
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.ID)
+    <dl class="dl-horizontal">
+    </dl>
+    <div class="form-group"> 
+            <input type="submit" value="Скласцi" class="btn btn-success" />
+         
+    </div>
+</div>
+}
+@using (Html.BeginForm("Index", "Listen", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <h5>Паслухай i напiшы, што пачуеш</h5>
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.ID)
+    <dl class="dl-horizontal">
+    </dl>
+    <div class="form-group"> 
+            <input type="submit" value="Слухаць" class="btn btn-success" />
+         
+    </div>
+</div>
+}
+@using (Html.BeginForm("Index", "See", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <h5>Напiшы, што бачыш на фота </h5>
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.ID)
+    <dl class="dl-horizontal">
+    </dl>
+    <div class="form-group"> 
+            <input type="submit" value="Напiсаць" class="btn btn-success" />
+         
+    </div>
+</div>
+} 
+<div> 
+</div> 

@@ -1,0 +1,27 @@
+﻿@model LearnPolish.Models.Exam
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<h2>
+    @Model.ExamTitle
+</h2>
+
+<h4>Цяпер табе трэба прайсці тэст, каб даведацца на якім узроўні ў цябе польская мова</h4>
+<div class="row" mt-5 md-2> 
+        <div class="col-lg-4">
+            
+            <p>
+                @Html.ActionLink("Тэст", "Index", "ShowQuestion", new { id = Model.ID }, new { @class = "btn btn-success btn-lg" })
+
+            </p>
+        </div> 
+
+</div>
+
+ 
+<br>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

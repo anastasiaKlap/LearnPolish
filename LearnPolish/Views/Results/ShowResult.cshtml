@@ -1,0 +1,19 @@
+﻿@model LearnPolish.Models.Result
+
+@{
+    ViewBag.Title = "ShowResult";
+}
+
+<h2>Твае балы</h2>
+
+<div>
+    <h2>  <label>@Session["meaning"]</label></h2>
+
+    <h2>  <label>Балы : @Session["correctAns"]</label></h2>
+
+    <h2>  <label>Узровень : @Session["grade"]</label></h2>
+
+
+
+    @Html.ActionLink("Заняткi", "LessonsForYou", "Lessons", null, new { @class = "btn btn-success btn-lg" })
+</div> 

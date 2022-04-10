@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LearnPolish.Models.Repeat>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Паўтарыць</h2>
+<hr />
+
+<div class="row" mt-5 md-2>
+    @if (@Session["isEmpty"].ToString() == "0")
+    {
+        <p>Пакуль у цябе няма слоў да паўтору</p>
+    }
+    else
+    {
+        @Html.ActionLink("Выдаліць усе", "DeleteAll", new { area = "" }, new { @class = "btn btn-danger" })
+        <hr />
+        foreach (var item in Model)
+        {
+
+            <div class="col-lg-4">
+                <div class="mr-auto p-6">
+                    @Html.ActionLink(" ", "DeleteRepeat", "Repeats", new { id = item.ID, ImageId = item.ID }, new { @class = "glyphicon glyphicon-remove", @style = "color:red", @title = "Выдаліць" })
+                </div>
+                <img src="~/Images/@item.Image.Card" alt="" height="100px" width="100px">
+
+                @foreach (var t in item.Image.Translations)
+                {
+                    <p>
+                        @t.Word
+                    </p>
+                    <p>
+                        @t.TranslationToPolish
+                    </p>
+
+                } 
+
+            </div>
+        }
+    }
+</div>

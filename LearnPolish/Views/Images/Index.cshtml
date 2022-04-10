@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LearnPolish.Models.Image>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Стварыць", "Create", new { area = "" }, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Lesson.LessonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Card)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lesson.LessonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Card)
+        </td>
+        <td>
+            @Html.ActionLink("Рэдагаваць", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Выдаліць", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Падрабязнасці", "Details", new { id = item.ID }, new { @class = "btn btn-info" })
+        </td>
+    </tr>
+}
+
+</table>

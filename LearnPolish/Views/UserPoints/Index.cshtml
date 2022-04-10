@@ -1,0 +1,63 @@
+﻿@model IEnumerable<LearnPolish.Models.UserPoints>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Lesson.LessonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lesson.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profile.Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForLetters)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForListen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForSee)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.LessonName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Profile.Login)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ForLetters)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ForListen)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ForSee)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+    </td>
+</tr>
+}
+
+</table>

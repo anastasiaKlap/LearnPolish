@@ -1,0 +1,83 @@
+﻿@model LearnPolish.Models.Module
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Падрабязнасці</h2>
+
+<div>
+    <h4>Пазем</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Узровень мовы
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModulLevel)
+        </dd>
+        <dt>
+            Колкасць слоў:
+        </dt>
+
+        <dd>
+            @Session["allWord"]
+        </dd>
+    </dl>
+</div>
+<hr />
+@foreach (var item in Model.Lessons)
+{
+    <div lass="row" mt-5 md-2>
+        <h3>@item.LessonName</h3>
+        @foreach (var img in item.Images)
+        {
+            <div class="col-lg-4">
+                <img src="~/Images/@img.Card" alt="" height="100px" width="100px">
+                @foreach (var tran in img.Translations)
+                {
+                    <p>@tran.Word</p>
+                    <p>@tran.TranslationToPolish</p>
+                }
+            </div>
+        }
+    </div>
+    <hr />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<hr />
+<p>
+    @Html.ActionLink("Рэдагаваць", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Да лiсты", "Index", new { area = "" }, new { @class = "btn btn-outline-dark" })
+</p> 

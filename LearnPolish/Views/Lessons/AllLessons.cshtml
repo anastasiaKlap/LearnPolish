@@ -1,0 +1,27 @@
+﻿@model IEnumerable<LearnPolish.Models.Lesson>
+@{
+    ViewBag.Title = "AllLessons";
+}
+
+<h2>Заняткі</h2>
+
+<div class="row" mt-5 md-2>
+    @foreach (var item in Model)
+    {
+
+
+
+
+    <div class="col-lg-4">
+        <h2>
+            @Html.DisplayFor(modelItem => item.LessonName)
+        </h2>
+        <img src="~/LessonImg/@item.Photo" alt="" height="100px" width="100px">
+        <p>
+        @Html.ActionLink("Гра", "Game", "Lessons", new { id = item.ID }, new { @class = "btn btn-success btn-sm, disabled" })
+        @Html.ActionLink("Усе словы", "Cards", "Lessons", new { id = item.ID }, new { @class = "btn btn-info btn-sm, disabled" })
+        </p>
+    </div>
+    }
+
+</div>
